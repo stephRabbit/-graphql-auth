@@ -1,0 +1,4 @@
+node_modules/
+.DS_STORE
+configSetup.js
+yarn-error.log
