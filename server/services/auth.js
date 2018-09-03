@@ -79,4 +79,11 @@ function login({ email, password, req }) {
   })
 }
 
-module.exports = { signup, login };
+// Save reference of user, logout out user and return user
+function logout({ req }) {
+  const { user } = req
+  req.logout()
+  return user
+}
+
+module.exports = { signup, login, logout }
