@@ -20,7 +20,6 @@ class AuthForm extends Component {
   }
 
   render() {
-    console.log(this.state)
     return (
       <div className="row">
         <form

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { graphql } from 'react-apollo'
+import { graphql, compose } from 'react-apollo'
 
 import liuQuery from '../queries/LoggedInUser'
 import LoginMutation from '../mutations/Login'
@@ -8,6 +8,17 @@ import AuthForm from './AuthForm'
 class LoginForm extends Component {
   state = {
     errors: []
+  }
+
+  /**
+   * @param {*} nextProps - props after rendering
+   * this.props - current props
+   */
+  componentWillUpdate(nextProps) {
+    if (!this.props.data.liu && nextProps.data.liu) {
+      // Redirect to dashboard
+      this.props.history.push('/dashboard')
+    }
   }
 
   onSubmit = ({ email, password }) => {
@@ -37,4 +48,7 @@ class LoginForm extends Component {
   }
 }
 
-export default graphql(LoginMutation)(LoginForm)
+export default compose(
+  graphql(liuQuery),
+  graphql(LoginMutation),
+)(LoginForm)
